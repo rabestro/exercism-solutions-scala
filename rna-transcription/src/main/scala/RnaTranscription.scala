@@ -3,6 +3,8 @@ object RnaTranscription {
     'C' -> 'G', 'G' -> 'C', 'T' -> 'A', 'A' -> 'U'
   )
 
-  def toRna(dna: String): Some[String] =
-    Some(dna.map(DnaRnaMap))
+  def toRna(dna: String): Option[String] =
+    Option.when(dna.forall(DnaRnaMap.contains))(
+      dna.map(DnaRnaMap)
+    )
 }
