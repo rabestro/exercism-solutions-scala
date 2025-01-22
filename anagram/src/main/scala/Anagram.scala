@@ -1,10 +1,7 @@
-object Anagram {
+object Anagram:
   def findAnagrams(word: String, candidates: List[String]): List[String] =
-    val wordLowered = word.toLowerCase
-    val wordSorted = wordLowered.sorted
+    val wordSorted = word.toLowerCase.sorted
 
-    candidates.filter { candidate =>
-      val lowered = candidate.toLowerCase
-      lowered != wordLowered && lowered.sorted == wordSorted
-    }
-}
+    candidates
+      .filterNot(_.equalsIgnoreCase(word))
+      .filter(_.toLowerCase.sorted == wordSorted)
