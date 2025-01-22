@@ -4,11 +4,11 @@ object BookStore:
 
   def total(books: List[Int]): Int =
     // Count the occurrences of each book series
-    val seriesCounts = (1 to SeriesCount).map(i => books.count(_ == i)).sorted.toArray
+    val seriesCounts = (1 to SeriesCount).map(i => books.count(_ == i)).sorted.toList
 
     // Calculate the differences between each count and the previous one, reversed
     val groupCounts = (0 until SeriesCount).map { i =>
-      if i == 0 then seriesCounts(0) else seriesCounts(i) - seriesCounts(i - 1)
+      if i == 0 then seriesCounts.head else seriesCounts(i) - seriesCounts(i - 1)
     }.reverse.toArray
 
     // Rearrange books in groups to get maximum discount
