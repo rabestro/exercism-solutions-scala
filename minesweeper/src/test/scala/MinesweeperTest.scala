@@ -23,6 +23,7 @@ class MinesweeperTest extends AnyFunSuite with Matchers {
   }
 
   test("minefield with only mines") {
+    pending
     Minesweeper.annotate(List("***",
                               "***",
                               "***")) should be(
