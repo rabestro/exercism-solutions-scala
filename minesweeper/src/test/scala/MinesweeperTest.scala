@@ -50,17 +50,14 @@ class MinesweeperTest extends AnyFunSuite with Matchers {
   }
 
   test("horizontal line") {
-    pending
     Minesweeper.annotate(List(" * * ")) should be(List("1*2*1"))
   }
 
   test("horizontal line, mines at edges") {
-    pending
     Minesweeper.annotate(List("*   *")) should be(List("*1 1*"))
   }
 
   test("vertical line") {
-    pending
     Minesweeper.annotate(List(" ",
                               "*",
                               " ",
@@ -74,7 +71,6 @@ class MinesweeperTest extends AnyFunSuite with Matchers {
   }
 
   test("vertical line, mines at edges") {
-    pending
     Minesweeper.annotate(List("*",
                               " ",
                               " ",
@@ -88,7 +84,6 @@ class MinesweeperTest extends AnyFunSuite with Matchers {
   }
 
   test("cross") {
-    pending
     Minesweeper.annotate(List("  *  ",
                               "  *  ",
                               "*****",
@@ -102,7 +97,6 @@ class MinesweeperTest extends AnyFunSuite with Matchers {
   }
 
   test("large minefield") {
-    pending
     Minesweeper.annotate(List(" *  * ",
                               "  *   ",
                               "    * ",
