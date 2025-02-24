@@ -23,7 +23,6 @@ class MinesweeperTest extends AnyFunSuite with Matchers {
   }
 
   test("minefield with only mines") {
-    pending
     Minesweeper.annotate(List("***",
                               "***",
                               "***")) should be(
@@ -33,7 +32,6 @@ class MinesweeperTest extends AnyFunSuite with Matchers {
   }
 
   test("mine surrounded by spaces") {
-    pending
     Minesweeper.annotate(List("   ",
                               " * ",
                               "   ")) should be(
@@ -43,7 +41,6 @@ class MinesweeperTest extends AnyFunSuite with Matchers {
   }
 
   test("space surrounded by mines") {
-    pending
     Minesweeper.annotate(List("***",
                               "* *",
                               "***")) should be(
