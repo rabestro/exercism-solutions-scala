@@ -13,5 +13,5 @@ object Queen:
 
 case class Queen(row: Int, col: Int):
   infix def canAttack(that: Queen): Boolean =
-    this.row == that.row || this.col == that.col ||
-      abs(this.col - that.col) == abs(this.row - that.row)
+    row == that.row || col == that.col ||
+      abs(col - that.col) == abs(row - that.row)
