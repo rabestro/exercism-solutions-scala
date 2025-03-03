@@ -11,7 +11,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
   }
 
   test("sets with elements are not empty") {
-    pending
     val set = CustomSet.fromList(List(1))
     CustomSet.empty(set) should be(false)
   }
