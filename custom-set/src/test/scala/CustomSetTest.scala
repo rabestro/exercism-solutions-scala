@@ -138,21 +138,18 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   // Add test cases - Unique elements can be added to a set
   test("add to empty set") {
-    pending
     val set = CustomSet.fromList(List())
     val expected = CustomSet.fromList(List(3))
     CustomSet.isEqual(CustomSet.insert(set, 3), expected) should be(true)
   }
 
   test("add to non-empty set") {
-    pending
     val set = CustomSet.fromList(List(1, 2, 4))
     val expected = CustomSet.fromList(List(1, 2, 3, 4))
     CustomSet.isEqual(CustomSet.insert(set, 3), expected) should be(true)
   }
 
   test("adding an existing element does not change the set") {
-    pending
     val set = CustomSet.fromList(List(1, 2, 3))
     val expected = CustomSet.fromList(List(1, 2, 3))
     CustomSet.isEqual(CustomSet.insert(set, 3), expected) should be(true)
