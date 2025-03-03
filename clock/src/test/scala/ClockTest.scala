@@ -50,42 +50,34 @@ class ClockTest extends AnyFunSuite with Matchers {
   }
 
   test("negative hour") {
-    pending
     Clock(-1, 15) should be(Clock(23, 15))
   }
 
   test("negative hour rolls over") {
-    pending
     Clock(-25, 0) should be(Clock(23, 0))
   }
 
   test("negative hour rolls over continuously") {
-    pending
     Clock(-91, 0) should be(Clock(5, 0))
   }
 
   test("negative minutes") {
-    pending
     Clock(1, -40) should be(Clock(0, 20))
   }
 
   test("negative minutes roll over") {
-    pending
     Clock(1, -160) should be(Clock(22, 20))
   }
 
   test("negative minutes roll over continuously") {
-    pending
     Clock(1, -4820) should be(Clock(16, 40))
   }
 
   test("negative hour and minutes both roll over") {
-    pending
     Clock(-25, -160) should be(Clock(20, 20))
   }
 
   test("negative hour and minutes both roll over continuously") {
-    pending
     Clock(-121, -5810) should be(Clock(22, 10))
   }
 
