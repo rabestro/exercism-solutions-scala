@@ -82,47 +82,38 @@ class ClockTest extends AnyFunSuite with Matchers {
   }
 
   test("add minutes") {
-    pending
     Clock(10, 0) + Clock(3) should be(Clock(10, 3))
   }
 
   test("add no minutes") {
-    pending
     Clock(6, 41) + Clock(0) should be(Clock(6, 41))
   }
 
   test("add to next hour") {
-    pending
     Clock(0, 45) + Clock(40) should be(Clock(1, 25))
   }
 
   test("add more than one hour") {
-    pending
     Clock(10, 0) + Clock(61) should be(Clock(11, 1))
   }
 
   test("add more than two hours with carry") {
-    pending
     Clock(0, 45) + Clock(160) should be(Clock(3, 25))
   }
 
   test("add across midnight") {
-    pending
     Clock(23, 59) + Clock(2) should be(Clock(0, 1))
   }
 
   test("add more than one day (1500 min = 25 hrs)") {
-    pending
     Clock(5, 32) + Clock(1500) should be(Clock(6, 32))
   }
 
   test("add more than two days") {
-    pending
     Clock(1, 1) + Clock(3500) should be(Clock(11, 21))
   }
 
   test("subtract minutes") {
-    pending
     Clock(10, 3) - Clock(3) should be(Clock(10, 0))
   }
 
