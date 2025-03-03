@@ -12,19 +12,18 @@ object CustomSet:
   def member(customSet: CustomSet, element: Int): Boolean =
     customSet.data.contains(element)
 
-  def isSubsetOf(a: CustomSet, b: CustomSet): Boolean = 
+  def isEqual(a: CustomSet, b: CustomSet): Boolean = a == b
+
+  def isSubsetOf(a: CustomSet, b: CustomSet): Boolean =
     a.data.subsetOf(b.data)
 
-  def isDisjointFrom(a: CustomSet, b: CustomSet): Boolean = 
+  def isDisjointFrom(a: CustomSet, b: CustomSet): Boolean =
     a.data.intersect(b.data).isEmpty
 
   def union(a: CustomSet, b: CustomSet): CustomSet = ???
 
   def intersection(a: CustomSet, b: CustomSet): CustomSet = ???
-  
+
   def difference(a: CustomSet, b: CustomSet): CustomSet = ???
-  
-  def isEqual(a: CustomSet, b: CustomSet): Boolean = ???
-  
+
   def insert(customSet: CustomSet, element: Int): CustomSet = ???
-  

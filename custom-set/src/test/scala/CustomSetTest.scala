@@ -101,42 +101,36 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   // Equal test cases - Sets with the same elements are equal
   test("empty sets are equal") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List())
     CustomSet.isEqual(set1, set2) should be(true)
   }
 
   test("empty set is not equal to non-empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List(1, 2, 3))
     CustomSet.isEqual(set1, set2) should be(false)
   }
 
   test("non-empty set is not equal to empty set") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3))
     val set2 = CustomSet.fromList(List())
     CustomSet.isEqual(set1, set2) should be(false)
   }
 
   test("sets with the same elements are equal") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2))
     val set2 = CustomSet.fromList(List(2, 1))
     CustomSet.isEqual(set1, set2) should be(true)
   }
 
   test("sets with different elements are not equal") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3))
     val set2 = CustomSet.fromList(List(1, 2, 4))
     CustomSet.isEqual(set1, set2) should be(false)
   }
 
   test("set is not equal to larger set with same elements") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3))
     val set2 = CustomSet.fromList(List(1, 2, 3, 4))
     CustomSet.isEqual(set1, set2) should be(false)
