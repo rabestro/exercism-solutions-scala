@@ -17,19 +17,16 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   // Contains test cases - Sets can report if they contain an element
   test("nothing is contained in an empty set") {
-    pending
     val set = CustomSet.fromList(List())
     CustomSet.member(set, 1) should be(false)
   }
 
   test("when the element is in the set") {
-    pending
     val set = CustomSet.fromList(List(1, 2, 3))
     CustomSet.member(set, 1) should be(true)
   }
 
   test("when the element is not in the set") {
-    pending
     val set = CustomSet.fromList(List(1, 2, 3))
     CustomSet.member(set, 4) should be(false)
   }
