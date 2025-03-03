@@ -1,15 +1,16 @@
 import scala.collection.mutable
 
-final case class CustomSet(set: mutable.BitSet)
+final case class CustomSet(data: mutable.BitSet)
 
 object CustomSet:
   def fromList(list: List[Int]): CustomSet =
     new CustomSet(mutable.BitSet(list *))
 
   def empty(customSet: CustomSet): Boolean =
-    customSet.set.isEmpty
+    customSet.data.isEmpty
 
-  def member(customSet: CustomSet, element: Int): Boolean = ???
+  def member(customSet: CustomSet, element: Int): Boolean =
+    customSet.data.contains(element)
 
   def isSubsetOf(a: CustomSet, b: CustomSet): Boolean = ???
 
