@@ -22,37 +22,30 @@ class ClockTest extends AnyFunSuite with Matchers {
   }
 
   test("hour rolls over continuously") {
-    pending
     Clock(100, 0) should be(Clock(4, 0))
   }
 
   test("sixty minutes is next hour") {
-    pending
     Clock(1, 60) should be(Clock(2, 0))
   }
 
   test("minutes roll over") {
-    pending
     Clock(0, 160) should be(Clock(2, 40))
   }
 
   test("minutes roll over continuously") {
-    pending
     Clock(0, 1723) should be(Clock(4, 43))
   }
 
   test("hour and minutes roll over") {
-    pending
     Clock(25, 160) should be(Clock(3, 40))
   }
 
   test("hour and minutes roll over continuously") {
-    pending
     Clock(201, 3001) should be(Clock(11, 1))
   }
 
   test("hour and minutes roll over to exactly midnight") {
-    pending
     Clock(72, 8640) should be(Clock(0, 0))
   }
 
