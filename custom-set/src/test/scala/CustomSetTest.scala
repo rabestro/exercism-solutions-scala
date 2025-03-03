@@ -33,42 +33,36 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   // Subset test cases - A set is a subset if all of its elements are contained in the other set
   test("empty set is a subset of another empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List())
     CustomSet.isSubsetOf(set1, set2) should be(true)
   }
 
   test("empty set is a subset of non-empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List(1))
     CustomSet.isSubsetOf(set1, set2) should be(true)
   }
 
   test("non-empty set is not a subset of empty set") {
-    pending
     val set1 = CustomSet.fromList(List(1))
     val set2 = CustomSet.fromList(List())
     CustomSet.isSubsetOf(set1, set2) should be(false)
   }
 
   test("set is a subset of set with exact same elements") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3))
     val set2 = CustomSet.fromList(List(1, 2, 3))
     CustomSet.isSubsetOf(set1, set2) should be(true)
   }
 
   test("set is a subset of larger set with same elements") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3))
     val set2 = CustomSet.fromList(List(4, 1, 2, 3))
     CustomSet.isSubsetOf(set1, set2) should be(true)
   }
 
   test("set is not a subset of set that does not contain its elements") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3))
     val set2 = CustomSet.fromList(List(4, 1, 3))
     CustomSet.isSubsetOf(set1, set2) should be(false)
@@ -76,35 +70,30 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   // Disjoint test cases - Sets are disjoint if they share no elements
   test("the empty set is disjoint with itself") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List())
     CustomSet.isDisjointFrom(set1, set2) should be(true)
   }
 
   test("empty set is disjoint with non-empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List(1))
     CustomSet.isDisjointFrom(set1, set2) should be(true)
   }
 
   test("non-empty set is disjoint with empty set") {
-    pending
     val set1 = CustomSet.fromList(List(1))
     val set2 = CustomSet.fromList(List())
     CustomSet.isDisjointFrom(set1, set2) should be(true)
   }
 
   test("sets are not disjoint if they share an element") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2))
     val set2 = CustomSet.fromList(List(2, 3))
     CustomSet.isDisjointFrom(set1, set2) should be(false)
   }
 
   test("sets are disjoint if they share no elements") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2))
     val set2 = CustomSet.fromList(List(3, 4))
     CustomSet.isDisjointFrom(set1, set2) should be(true)
