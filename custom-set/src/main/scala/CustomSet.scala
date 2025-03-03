@@ -20,10 +20,13 @@ object CustomSet:
   def isDisjointFrom(a: CustomSet, b: CustomSet): Boolean =
     a.data.intersect(b.data).isEmpty
 
-  def union(a: CustomSet, b: CustomSet): CustomSet = ???
+  def union(a: CustomSet, b: CustomSet): CustomSet =
+    new CustomSet(a.data | b.data)
 
   def intersection(a: CustomSet, b: CustomSet): CustomSet = ???
 
   def difference(a: CustomSet, b: CustomSet): CustomSet = ???
 
-  def insert(customSet: CustomSet, element: Int): CustomSet = ???
+  def insert(customSet: CustomSet, element: Int): CustomSet =
+    customSet.data.addOne(element)
+    customSet
