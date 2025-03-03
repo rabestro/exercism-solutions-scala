@@ -157,7 +157,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   // Intersection test cases - Intersection returns a set of all shared elements
   test("intersection of two empty sets is an empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List())
     val expected = CustomSet.fromList(List())
@@ -166,7 +165,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
   }
 
   test("intersection of an empty set and non-empty set is an empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List(3, 2, 5))
     val expected = CustomSet.fromList(List())
@@ -175,7 +173,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
   }
 
   test("intersection of a non-empty set and an empty set is an empty set") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3, 4))
     val set2 = CustomSet.fromList(List())
     val expected = CustomSet.fromList(List())
@@ -184,7 +181,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
   }
 
   test("intersection of two sets with no shared elements is an empty set") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3))
     val set2 = CustomSet.fromList(List(4, 5, 6))
     val expected = CustomSet.fromList(List())
@@ -194,7 +190,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   test(
     "intersection of two sets with shared elements is a set of the shared elements") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3, 4))
     val set2 = CustomSet.fromList(List(3, 2, 5))
     val expected = CustomSet.fromList(List(2, 3))
@@ -204,7 +199,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   // Difference test cases - Difference (or Complement) of a set is a set of all elements that are only in the first set
   test("difference of two empty sets is an empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List())
     val expected = CustomSet.fromList(List())
@@ -213,7 +207,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
   }
 
   test("difference of empty set and non-empty set is an empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List(3, 2, 5))
     val expected = CustomSet.fromList(List())
@@ -222,7 +215,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
   }
 
   test("difference of a non-empty set and an empty set is the non-empty set") {
-    pending
     val set1 = CustomSet.fromList(List(1, 2, 3, 4))
     val set2 = CustomSet.fromList(List())
     val expected = CustomSet.fromList(List(1, 2, 3, 4))
@@ -232,7 +224,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   test(
     "difference of two non-empty sets is a set of elements that are only in the first set") {
-    pending
     val set1 = CustomSet.fromList(List(3, 2, 1))
     val set2 = CustomSet.fromList(List(2, 4))
     val expected = CustomSet.fromList(List(1, 3))
@@ -242,7 +233,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
 
   // Union test cases - Union returns a set of all elements in either set
   test("union of empty sets is an empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List())
     val expected = CustomSet.fromList(List())
@@ -250,7 +240,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
   }
 
   test("union of an empty set and non-empty set is the non-empty set") {
-    pending
     val set1 = CustomSet.fromList(List())
     val set2 = CustomSet.fromList(List(2))
     val expected = CustomSet.fromList(List(2))
@@ -258,7 +247,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
   }
 
   test("union of a non-empty set and empty set is the non-empty set") {
-    pending
     val set1 = CustomSet.fromList(List(1, 3))
     val set2 = CustomSet.fromList(List())
     val expected = CustomSet.fromList(List(1, 3))
@@ -266,7 +254,6 @@ class CustomSetTest extends AnyFunSuite with Matchers {
   }
 
   test("union of non-empty sets contains all unique elements") {
-    pending
     val set1 = CustomSet.fromList(List(1, 3))
     val set2 = CustomSet.fromList(List(2, 3))
     val expected = CustomSet.fromList(List(3, 2, 1))

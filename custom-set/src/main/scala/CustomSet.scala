@@ -23,9 +23,11 @@ object CustomSet:
   def union(a: CustomSet, b: CustomSet): CustomSet =
     new CustomSet(a.data | b.data)
 
-  def intersection(a: CustomSet, b: CustomSet): CustomSet = ???
+  def intersection(a: CustomSet, b: CustomSet): CustomSet = 
+    new CustomSet(a.data & b.data)
 
-  def difference(a: CustomSet, b: CustomSet): CustomSet = ???
+  def difference(a: CustomSet, b: CustomSet): CustomSet = 
+    new CustomSet(a.data &~ b.data)
 
   def insert(customSet: CustomSet, element: Int): CustomSet =
     customSet.data.addOne(element)
