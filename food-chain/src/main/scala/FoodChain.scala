@@ -20,11 +20,11 @@ object FoodChain:
     val animal = Phrase(i)._1
     result.add(s"I know an old lady who swallowed a $animal.")
     if i > 0 then result.add(Phrase(i)._2)
-    if i < 7 then
+    if i < Phrase.size - 1 then
       (i to 1 by -1).foreach { x =>
         val predator  = Phrase(x)._1
         val prey = Phrase(x - 1)._1
-        val description = if x == 0 then " that wriggled and jiggled and tickled inside her." else ""
+        val description = if x == 2 then " that wriggled and jiggled and tickled inside her" else ""
         result.add(s"She swallowed the $predator to catch the $prey$description.")
       }
       result.add(Phrase.head._2)
