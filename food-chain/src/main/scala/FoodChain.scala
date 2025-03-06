@@ -13,7 +13,7 @@ object FoodChain:
   )
 
   def recite(start: Int, end: Int): String =
-    (start - 1 until end).map(verse).mkString("", "\n", "\n\n")
+    (start - 1 until end).map(verse).mkString("", "\n\n", "\n\n")
 
   private def verse(i: Int): String =
     val result = StringJoiner("\n")
