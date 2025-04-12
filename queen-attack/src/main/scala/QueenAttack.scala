@@ -9,7 +9,7 @@ object Queen:
     x >= 0 && x <= 7 && y >= 0 && y <= 7
 
   def create(x: Int, y: Int): Option[Queen] =
-    if isValidPosition(x, y) then Some(Queen(x, y)) else None
+    (Option when isValidPosition(x, y))(Queen(x, y))
 
 case class Queen(row: Int, col: Int):
   infix def canAttack(that: Queen): Boolean =

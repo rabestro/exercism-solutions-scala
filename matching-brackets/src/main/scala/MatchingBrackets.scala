@@ -8,7 +8,7 @@ object MatchingBrackets:
   private val ClosingBrackets = BracketPairs.keySet
 
   @tailrec
-  def isPaired(brackets: String, stack: List[Char] = List()): Boolean =
+  def isPaired(brackets: String, stack: List[Char] = Nil): Boolean =
     if brackets.isEmpty then stack.isEmpty
     else if ClosingBrackets contains brackets.head
     then stack match
