@@ -1,0 +1,20 @@
+stateDiagram-v2
+    [*] --> RunningGame: Bowling.apply()
+
+    RunningGame --> RunningGame: roll(pins)\n[Frame < 10 not complete]
+    RunningGame --> IncorrectGame: roll(pins)\n[Invalid pins or combo]
+    RunningGame --> CompletedGame: roll(pins)\n[Completes Frame 10 (Open)]
+    RunningGame --> AwaitingSpareBonus: roll(pins)\n[Completes Frame 10 (Spare)]
+    RunningGame --> AwaitingStrikeBonus: roll(pins)\n[Completes Frame 10 (Strike)]
+
+    AwaitingSpareBonus --> IncorrectGame: roll(pins)\n[Invalid pins]
+    AwaitingSpareBonus --> CompletedGame: roll(pins)\n[Valid fill roll]
+
+    AwaitingStrikeBonus --> IncorrectGame: roll(pins)\n[Invalid pins or combo]
+    AwaitingStrikeBonus --> AwaitingStrikeBonus: roll(pins)\n[Valid 1st fill roll]
+    AwaitingStrikeBonus --> CompletedGame: roll(pins)\n[Valid 2nd fill roll]
+
+    CompletedGame --> IncorrectGame: roll(pins)\n[Game already over]
+    IncorrectGame --> IncorrectGame: roll(pins)\n[Game already over]
+    
+    

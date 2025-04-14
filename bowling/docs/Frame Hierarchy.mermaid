@@ -1,0 +1,59 @@
+classDiagram
+
+%% --- Frame Hierarchy ---
+
+    class Frame {
+        <<Trait>>
+    }
+
+    class StateFrame {
+        <<Trait>>
+        +Frame
+    }
+    Frame <|-- StateFrame
+
+    class EmptyFrame {
+        <<Object>>
+        +StateFrame
+    }
+    StateFrame <|-- EmptyFrame
+
+    class IncompleteFrame {
+        +StateFrame
+        first: Int
+    }
+    StateFrame <|-- IncompleteFrame
+
+    class CompletedFrame {
+        <<Trait>>
+        +Frame
+    }
+    Frame <|-- CompletedFrame
+
+    class OpenFrame {
+        +CompletedFrame
+        first: Int
+        second: Int
+    }
+    CompletedFrame <|-- OpenFrame
+
+    class SpareFrame {
+        +CompletedFrame
+        first: Int
+        second: Int
+    }
+    CompletedFrame <|-- SpareFrame
+
+    class StrikeFrame {
+        <<Object>>
+        +CompletedFrame
+    }
+    CompletedFrame <|-- StrikeFrame
+
+%% --- Bowling State Hierarchy ---
+
+    class Bowling {
+        <<Trait>>
+        +roll(pins: Int) Bowling
+        +score() Either~String, Int~
+    }
