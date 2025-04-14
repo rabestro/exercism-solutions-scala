@@ -49,11 +49,3 @@ classDiagram
         +CompletedFrame
     }
     CompletedFrame <|-- StrikeFrame
-
-%% --- Bowling State Hierarchy ---
-
-    class Bowling {
-        <<Trait>>
-        +roll(pins: Int) Bowling
-        +score() Either~String, Int~
-    }
