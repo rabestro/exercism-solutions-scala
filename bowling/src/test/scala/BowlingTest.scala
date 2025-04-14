@@ -11,13 +11,11 @@ class BowlingTest extends AnyFunSuite with Matchers {
   }
 
   test("should be able to score a game with no strikes or spares") {
-    pending
     val score = List(3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6, 3, 6).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).score()
     score should be (Right(90))
   }
 
   test("a spare followed by zeros is worth ten points") {
-    pending
     val score = List(6, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).score()
     score should be (Right(10))
   }
@@ -35,7 +33,6 @@ class BowlingTest extends AnyFunSuite with Matchers {
   }
 
   test("a spare in the last frame gets a one roll bonus that is counted once") {
-    pending
     val score = List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3, 7).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).score()
     score should be (Right(17))
   }
@@ -119,55 +116,46 @@ class BowlingTest extends AnyFunSuite with Matchers {
   }
 
   test("two bonus rolls after a strike in the last frame can score more than 10 points if one is a strike") {
-    pending
     val score = List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10, 6).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).score()
     score should be (Right(26))
   }
 
   test("the second bonus rolls after a strike in the last frame cannot be a strike if the first one is not a strike") {
-    pending
     val score = List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 6).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).roll(10).score()
     score.isLeft should be (true)
   }
 
   test("second bonus roll after a strike in the last frame cannot score more than 10 points") {
-    pending
     val score = List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).roll(11).score()
     score.isLeft should be (true)
   }
 
   test("an unstarted game cannot be scored") {
-    pending
     val score = List().foldLeft(Bowling())((acc, roll) => acc.roll(roll)).score()
     score.isLeft should be (true)
   }
 
   test("an incomplete game cannot be scored") {
-    pending
     val score = List(0, 0).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).score()
     score.isLeft should be (true)
   }
 
   test("cannot roll if game already has ten frames") {
-    pending
     val score = List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).roll(0).score()
     score.isLeft should be (true)
   }
 
   test("bonus rolls for a strike in the last frame must be rolled before score can be calculated") {
-    pending
     val score = List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).score()
     score.isLeft should be (true)
   }
 
   test("both bonus rolls for a strike in the last frame must be rolled before score can be calculated") {
-    pending
     val score = List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 10).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).score()
     score.isLeft should be (true)
   }
 
   test("bonus roll for a spare in the last frame must be rolled before score can be calculated") {
-    pending
     val score = List(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 3).foldLeft(Bowling())((acc, roll) => acc.roll(roll)).score()
     score.isLeft should be (true)
   }
