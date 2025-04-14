@@ -1,51 +1,54 @@
+---
+config:
+  class:
+    hideEmptyMembersBox: true
+  theme: mc
+  look: handDrawn
+  layout: dagre
+---
 classDiagram
-
-%% --- Frame Hierarchy ---
-
+    direction TB
     class Frame {
-        <<Trait>>
     }
-
-    class StateFrame {
-        <<Trait>>
-        +Frame
-    }
-    Frame <|-- StateFrame
-
     class EmptyFrame {
-        <<Object>>
-        +StateFrame
     }
-    StateFrame <|-- EmptyFrame
-
     class IncompleteFrame {
-        +StateFrame
         first: Int
     }
-    StateFrame <|-- IncompleteFrame
-
-    class CompletedFrame {
-        <<Trait>>
-        +Frame
-    }
-    Frame <|-- CompletedFrame
-
-    class OpenFrame {
-        +CompletedFrame
-        first: Int
-        second: Int
-    }
-    CompletedFrame <|-- OpenFrame
-
-    class SpareFrame {
-        +CompletedFrame
-        first: Int
-        second: Int
-    }
-    CompletedFrame <|-- SpareFrame
-
     class StrikeFrame {
-        <<Object>>
-        +CompletedFrame
     }
-    CompletedFrame <|-- StrikeFrame
+    class SpareFrame {
+        first: Int
+        second: Int
+    }
+    class OpenFrame {
+        first: Int
+        second: Int
+    }
+    class CompletedFrame {
+    }
+    class StateFrame {
+    }
+    <<Trait>> Frame
+    <<Object>> EmptyFrame
+    <<Object>> StrikeFrame
+    <<Trait>> CompletedFrame
+    <<Trait>> StateFrame
+    Frame <|-- StateFrame
+    StateFrame <|.. EmptyFrame
+    StateFrame <|.. IncompleteFrame
+    Frame <|-- CompletedFrame
+    CompletedFrame <|.. OpenFrame
+    CompletedFrame <|.. SpareFrame
+    CompletedFrame <|.. StrikeFrame
+    class Frame:::Ash
+    class EmptyFrame:::Peach
+    class IncompleteFrame:::Peach
+    class StrikeFrame:::Aqua
+    class SpareFrame:::Aqua
+    class OpenFrame:::Aqua
+    class CompletedFrame:::Ash
+    class StateFrame:::Ash
+classDef Aqua :, stroke-width:1px, stroke-dasharray:none, stroke:#46EDC8, fill:#DEFFF8, color:#378E7A
+classDef Peach :, stroke-width:1px, stroke-dasharray:none, stroke:#FBB35A, fill:#FFEFDB, color:#8F632D
+classDef Ash :, stroke-width:1px, stroke-dasharray:none, stroke:#999999, fill:#EEEEEE, color:#000000

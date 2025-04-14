@@ -1,64 +1,82 @@
+---
+config:
+  class:
+    hideEmptyMembersBox: true
+  theme: mc
+  look: handDrawn
+  layout: dagre
+---
 classDiagram
+    direction TB
     class Bowling {
-        <<Trait>>
         +roll(pins: Int) Bowling
         +score() Either~String, Int~
     }
-
     class Bowling_ {
-        <<Object>>
         +MinPins: Int
         +MaxPins: Int
         +MaxFrames: Int
         +apply() Bowling
         +withPinValidation(Int)(Function1) Bowling
     }
-    Bowling -- Bowling_ : Companion
-
-    class IncompleteGame {
-        <<Trait>>
-        +Bowling
-        #score() Either~String, Int~  /* Overrides Bowling.score */
-    }
-    Bowling <|-- IncompleteGame
-
-    class RunningGame {
-        +IncompleteGame
-        completed: List~CompletedFrame~
-        current: StateFrame
-        +roll(pins: Int) Bowling
-    }
-    IncompleteGame <|-- RunningGame
-
-    class AwaitingSpareBonus {
-        +IncompleteGame
-        frames: List~CompletedFrame~
-        +roll(pins: Int) Bowling
-    }
-    IncompleteGame <|-- AwaitingSpareBonus
-
-    class AwaitingStrikeBonus {
-        +IncompleteGame
-        completed: List~CompletedFrame~
-        rolls: List~Int~
-        +roll(pins: Int) Bowling
-    }
-    IncompleteGame <|-- AwaitingStrikeBonus
-
     class IncorrectGame {
-        +Bowling
         reason: String
         +roll(pins: Int) Bowling
         +score() Either~String, Int~
     }
-    Bowling <|-- IncorrectGame
-
+    class AwaitingSpareBonus {
+        frames: List~CompletedFrame~
+        +roll(pins: Int) Bowling
+    }
+    class RunningGame {
+        completed: List~CompletedFrame~
+        current: StateFrame
+        +roll(pins: Int) Bowling
+    }
+    class IncompleteGame {
+        #score() Either~String, Int~
+    }
     class CompletedGame {
-        +Bowling
         frames: List~CompletedFrame~
         rolls: List~Int~
         +roll(pins: Int) Bowling
         +score() Either~String, Int~
-        -score(frames, rolls) Int /* Private helper */
+        -score(frames, rolls) Int
     }
+    class AwaitingStrikeBonus {
+        frames: List~CompletedFrame~
+        rolls: List~Int~
+        +roll(pins: Int) Bowling
+    }
+
+    <<Trait>> Bowling
+    <<Object>> Bowling_
+    <<Trait>> IncompleteGame
+
+    Bowling -- Bowling_ : Companion
+    Bowling <|-- IncompleteGame
+    IncompleteGame <|-- RunningGame
+    IncompleteGame <|-- AwaitingSpareBonus
+    IncompleteGame <|-- AwaitingStrikeBonus
+    Bowling <|-- IncorrectGame
     Bowling <|-- CompletedGame
+
+style Bowling :,stroke-width:1px,stroke-dasharray:none,stroke:#999999,fill:#EEEEEE,color:#000000
+style Bowling_ :,stroke-width:1px,stroke-dasharray:none,stroke:#999999,fill:#EEEEEE,color:#000000
+style IncorrectGame :,stroke-width:1px,stroke-dasharray:none,stroke:#FF5978,fill:#FFDFE5,color:#8E2236
+style AwaitingSpareBonus stroke:#374D7C,fill:#E2EBFF,color:#374D7C
+style RunningGame stroke:#374D7C,fill:#E2EBFF,color:#374D7C
+style IncompleteGame :,stroke-width:1px,stroke-dasharray:none,stroke:#999999,fill:#EEEEEE,color:#000000
+style CompletedGame :,stroke-width:1px,stroke-dasharray:none,stroke:#46EDC8,fill:#DEFFF8,color:#378E7A
+style AwaitingStrikeBonus stroke:#374D7C,fill:#E2EBFF,color:#374D7C
+
+class Bowling:::Ash
+class Bowling_:::Ash
+class IncorrectGame:::Rose
+class AwaitingSpareBonus:::Peach
+class RunningGame:::Peach
+class IncompleteGame:::Ash
+class CompletedGame:::Aqua
+class AwaitingStrikeBonus:::Peach
+
+classDef Peach :,stroke-width:1px, stroke-dasharray:none, stroke:#FBB35A, fill:#FFEFDB, color:#8F632D
