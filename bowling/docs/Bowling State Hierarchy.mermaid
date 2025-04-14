@@ -1,0 +1,64 @@
+classDiagram
+    class Bowling {
+        <<Trait>>
+        +roll(pins: Int) Bowling
+        +score() Either~String, Int~
+    }
+
+    class Bowling_ {
+        <<Object>>
+        +MinPins: Int
+        +MaxPins: Int
+        +MaxFrames: Int
+        +apply() Bowling
+        +withPinValidation(Int)(Function1) Bowling
+    }
+    Bowling -- Bowling_ : Companion
+
+    class IncompleteGame {
+        <<Trait>>
+        +Bowling
+        #score() Either~String, Int~  /* Overrides Bowling.score */
+    }
+    Bowling <|-- IncompleteGame
+
+    class RunningGame {
+        +IncompleteGame
+        completed: List~CompletedFrame~
+        current: StateFrame
+        +roll(pins: Int) Bowling
+    }
+    IncompleteGame <|-- RunningGame
+
+    class AwaitingSpareBonus {
+        +IncompleteGame
+        frames: List~CompletedFrame~
+        +roll(pins: Int) Bowling
+    }
+    IncompleteGame <|-- AwaitingSpareBonus
+
+    class AwaitingStrikeBonus {
+        +IncompleteGame
+        completed: List~CompletedFrame~
+        rolls: List~Int~
+        +roll(pins: Int) Bowling
+    }
+    IncompleteGame <|-- AwaitingStrikeBonus
+
+    class IncorrectGame {
+        +Bowling
+        reason: String
+        +roll(pins: Int) Bowling
+        +score() Either~String, Int~
+    }
+    Bowling <|-- IncorrectGame
+
+    class CompletedGame {
+        +Bowling
+        frames: List~CompletedFrame~
+        rolls: List~Int~
+        +roll(pins: Int) Bowling
+        +score() Either~String, Int~
+        -score(frames, rolls) Int /* Private helper */
+    }
+    Bowling <|-- CompletedGame
