@@ -15,7 +15,7 @@ object PythagoreanTriplet:
   def pythagoreanTripletsSum(sum: Int): Seq[(Int, Int, Int)] =
     for {
       a <- 1 to sum / 3
-      b <- a + 1 until (sum - a) / 2
+      b <- a + 1 to (sum - a - 1) / 2
       c = sum - a - b
       candidate = (a, b, c)
       if isPythagorean(candidate)
