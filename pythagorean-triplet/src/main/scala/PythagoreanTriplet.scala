@@ -1,4 +1,6 @@
 object PythagoreanTriplet:
+  private val smallestPossibleA = 3
+
   def isPythagorean(candidate: (Int, Int, Int)): Boolean =
     val (a, b, c) = candidate
     a < b && b < c && a * a + b * b == c * c
@@ -6,19 +8,22 @@ object PythagoreanTriplet:
   def pythagoreanTriplets(min: Int, max: Int): Seq[(Int, Int, Int)] =
     for {
       a <- min to max - 2
-      b <- a + 1 to math.sqrt(max * max - a * a).toInt
+      bMax = math.sqrt(max * max - a * a).toInt
+      b <- a + 1 to bMax
       c = math.sqrt(a * a + b * b)
       if c.isValidInt
-      candidate = (a, b, c.toInt)
-      if isPythagorean(candidate)
-    } yield candidate
+      if b < c.toInt
+    } yield (a, b, c.toInt)
 
   def pythagoreanTripletsSum(sum: Int): Seq[(Int, Int, Int)] =
     for {
-      a <- 1 to sum / 3
-      b <- a + 1 to (sum - a - 1) / 2
+      a <- smallestPossibleA to sum / 3
+      numerator = (sum * sum) - (2 * sum * a)
+      denominator = 2 * (sum - a)
+      remainder = numerator % denominator
+      if remainder == 0
+      b = numerator / denominator
+      if a < b
       c = sum - a - b
-      candidate = (a, b, c)
-      if isPythagorean(candidate)
-    } yield candidate
+    } yield (a, b, c)
 
