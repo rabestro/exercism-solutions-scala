@@ -6,11 +6,18 @@ object PythagoreanTriplet:
   def pythagoreanTriplets(min: Int, max: Int): Seq[(Int, Int, Int)] =
     for {
       a <- min to max - 2
-      b <- a until max
-      c <- b to max
-      candidate  = (a, b, c)
+      b <- a + 1 until max
+      c <- b + 1 to max
+      candidate = (a, b, c)
       if isPythagorean(candidate)
     } yield candidate
 
-  def pythagoreanTripletsSum(sum: Int): Seq[(Int, Int, Int)] = Nil
+  def pythagoreanTripletsSum(sum: Int): Seq[(Int, Int, Int)] =
+    for {
+      a <- 1 to sum / 3
+      b <- a + 1 until (sum - a) / 2
+      c = sum - a - b
+      candidate = (a, b, c)
+      if isPythagorean(candidate)
+    } yield candidate
 
