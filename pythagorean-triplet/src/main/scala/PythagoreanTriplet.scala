@@ -6,9 +6,10 @@ object PythagoreanTriplet:
   def pythagoreanTriplets(min: Int, max: Int): Seq[(Int, Int, Int)] =
     for {
       a <- min to max - 2
-      b <- a + 1 until max
-      c <- b + 1 to max
-      candidate = (a, b, c)
+      b <- a + 1 to math.sqrt(max * max - a * a).toInt
+      c = math.sqrt(a * a + b * b)
+      if c.isValidInt
+      candidate = (a, b, c.toInt)
       if isPythagorean(candidate)
     } yield candidate
 
