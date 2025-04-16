@@ -77,7 +77,6 @@ class CircularBufferTest extends AnyFunSuite with Matchers {
   }
 
   test("Overwrite acts like write on non-full buffer") {
-    pending
     val buff = new CircularBuffer(2)
     buff.write(1)
     buff.overwrite(2)
@@ -86,7 +85,6 @@ class CircularBufferTest extends AnyFunSuite with Matchers {
   }
 
   test("Overwrite replaces the oldest item on full buffer") {
-    pending
     val buff = new CircularBuffer(2)
     buff.write(1)
     buff.write(2)
@@ -96,7 +94,6 @@ class CircularBufferTest extends AnyFunSuite with Matchers {
   }
 
   test("Overwrite replaces the oldest item remaining in buffer following a read") {
-    pending
     val buff = new CircularBuffer(3)
     buff.write(1)
     buff.write(2)
@@ -110,7 +107,6 @@ class CircularBufferTest extends AnyFunSuite with Matchers {
   }
 
   test("Initial clear does not affect wrapping around") {
-    pending
     val buff = new CircularBuffer(2)
     buff.clear()
     buff.write(1)
