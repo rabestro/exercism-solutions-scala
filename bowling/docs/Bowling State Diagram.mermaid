@@ -1,0 +1,27 @@
+---
+config:
+  theme: mc
+  look: handDrawn
+  layout: elk
+---
+stateDiagram
+    direction TB
+    classDef errorState fill:#ffcccc,stroke:#cc0000,stroke-width:2px,color:#333;
+    classDef successState fill:#ccffcc,stroke:#006600,stroke-width:2px,color:#333;
+    classDef Peach stroke-width:1px,stroke-dasharray:none,stroke:#FBB35A,fill:#FFEFDB,color:#8F632D;
+    [*] --> RunningGame:Bowling.apply()
+    RunningGame --> RunningGame:<b>roll(pins)</b><br>[Frame < 10 not complete]
+    RunningGame --> IncorrectGame:<b>roll(pins)</b><br>[Invalid pins or combo]
+    RunningGame --> CompletedGame:<b>roll(pins)</b><br>[Completes Frame 10 (Open)]
+    RunningGame --> AwaitingSpareBonus:<b>roll(pins)</b><br>[Completes Frame 10 (Spare)]
+    RunningGame --> AwaitingStrikeBonus:<b>roll(pins)</b><br>[Completes Frame 10 (Strike)]
+    AwaitingSpareBonus --> IncorrectGame:<b>roll(pins)</b><br>[Invalid pins]
+    AwaitingSpareBonus --> CompletedGame:<b>roll(pins)</b><br>[Valid fill roll]
+    AwaitingStrikeBonus --> IncorrectGame:<b>roll(pins)</b><br>[Invalid pins or combo]
+    AwaitingStrikeBonus --> AwaitingStrikeBonus:<b>roll(pins)</b><br>[Valid 1st fill roll]
+    AwaitingStrikeBonus --> CompletedGame:<b>roll(pins)</b><br>[Valid 2nd fill roll]
+    CompletedGame --> IncorrectGame:<b>roll(pins)</b><br>[Game already over]
+    IncorrectGame --> IncorrectGame:<b>roll(pins)</b><br>[Game already over]
+    class IncorrectGame errorState
+    class CompletedGame successState
+    class RunningGame,AwaitingSpareBonus,AwaitingStrikeBonus Peach
