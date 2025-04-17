@@ -8,7 +8,4 @@ object Diamond:
 
     val forwardSequence = ('A' to widest).toList
     val reverseSequence = ('A' until widest).toList.reverse
-    for (symbol <- forwardSequence ++ reverseSequence)
-      yield line(symbol)
-
-
+    forwardSequence ++ reverseSequence map line
