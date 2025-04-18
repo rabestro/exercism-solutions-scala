@@ -1,6 +1,6 @@
 import scala.annotation.tailrec
 
-object RomanNumerals {
+object RomanNumerals:
   private val romanNumerals = Seq(
     1000 -> "M", 900 -> "CM", 500 -> "D", 400 -> "CD",
     100 -> "C", 90 -> "XC", 50 -> "L", 40 -> "XL",
@@ -16,4 +16,3 @@ object RomanNumerals {
   def roman(number: Int): String =
     require(number > 0 && number <= 3999, "Number must be in the range 1 to 3999")
     convert(number)
-}
