@@ -14,17 +14,14 @@ class LuhnTest extends AnyFunSuite with Matchers {
   }
 
   test("a simple valid SIN that remains valid if reversed") {
-    pending
     Luhn.valid("059") should be(true)
   }
 
   test("a simple valid SIN that becomes invalid if reversed") {
-    pending
     Luhn.valid("59") should be(true)
   }
 
   test("a valid Canadian SIN") {
-    pending
     Luhn.valid("055 444 285") should be(true)
   }
 
@@ -53,12 +50,10 @@ class LuhnTest extends AnyFunSuite with Matchers {
   }
 
   test("more than a single zero is valid") {
-    pending
     Luhn.valid("0000 0") should be(true)
   }
 
   test("input digit 9 is correctly converted to output digit 9") {
-    pending
     Luhn.valid("091") should be(true)
   }
 
