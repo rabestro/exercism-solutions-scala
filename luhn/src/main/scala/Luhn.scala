@@ -1,2 +1,2 @@
 object Luhn:
-  def valid(cardNumber: String): Boolean = false
+  def valid(number: String): Boolean = false

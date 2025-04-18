@@ -10,7 +10,6 @@ class LuhnTest extends AnyFunSuite with Matchers {
   }
 
   test("a single zero is invalid") {
-    pending
     Luhn.valid("0") should be(false)
   }
 
@@ -30,32 +29,26 @@ class LuhnTest extends AnyFunSuite with Matchers {
   }
 
   test("invalid Canadian SIN") {
-    pending
     Luhn.valid("055 444 286") should be(false)
   }
 
   test("invalid credit card") {
-    pending
     Luhn.valid("8273 1232 7352 0569") should be(false)
   }
 
   test("valid strings with a non-digit included become invalid") {
-    pending
     Luhn.valid("055a 444 285") should be(false)
   }
 
   test("valid strings with punctuation included become invalid") {
-    pending
     Luhn.valid("055-444-285") should be(false)
   }
 
   test("valid strings with symbols included become invalid") {
-    pending
     Luhn.valid("055£ 444$ 285") should be(false)
   }
 
   test("single zero with space is invalid") {
-    pending
     Luhn.valid(" 0") should be(false)
   }
 
@@ -70,7 +63,6 @@ class LuhnTest extends AnyFunSuite with Matchers {
   }
 
   test("strings with non-digits is invalid") {
-    pending
     Luhn.valid(":9") should be(false)
   }
 }
