@@ -4,6 +4,7 @@ import java.time.temporal.TemporalAdjusters.{dayOfWeekInMonth, firstInMonth, las
 import java.time.{DayOfWeek, LocalDate, Year}
 
 case class Meetup(month: Int, year: Int) {
+  private val firstTeenthDay = 13
 
   def day(day: Int, schedule: Schedule): LocalDate =
     val dayOfWeek = DayOfWeek.of(day)
@@ -15,7 +16,7 @@ case class Meetup(month: Int, year: Int) {
       case Schedule.Teenth => nextOrSame(dayOfWeek)
       case Schedule.Last => lastInMonth(dayOfWeek)
     }
-    Year.of(year).atMonth(month).atDay(13) `with` adjuster
+    Year.of(year).atMonth(month).atDay(firstTeenthDay) `with` adjuster
 }
 
 object Schedule extends Enumeration {
