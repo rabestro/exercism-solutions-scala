@@ -37,29 +37,24 @@ class CipherTest extends AnyFunSuite with Matchers {
   }
 
   test("Substitution cipher - can encode") { 
-    pending
     Cipher(Some("abcdefghij")).encode("aaaaaaaaaa") should be ("abcdefghij")
   }
 
   test("Substitution cipher - can decode") { 
-    pending
     Cipher(Some("abcdefghij")).decode("abcdefghij") should be ("aaaaaaaaaa")
   }
 
   test("Substitution cipher - is reversible") { 
-    pending
     val cipher = Cipher(Some("abcdefghij"))
     cipher.decode(cipher.encode("abcdefghij")) should be ("abcdefghij")
   }
 
   test("Substitution cipher - can double shift") { 
-    pending
     val cipher = Cipher(Some("iamapandabear"))
     cipher.encode("iamapandabear") should be ("qayaeaagaciai")
   }
 
   test("Substitution cipher - can wrap") { 
-    pending
     Cipher(Some("abcdefghij")).encode("zzzzzzzzzz") should be ("zabcdefghi")
   }
 }

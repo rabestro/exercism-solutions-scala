@@ -9,8 +9,8 @@ class Cipher(cipherKey: Option[String]):
   def encode(text: String): String =
     text.to(LazyList).zip(keyStream).map(Cipher.encode).mkString
 
-  def decode(key: String): String = "aaaaaaaaaa"
-
+  def decode(text: String): String =
+    text.to(LazyList).zip(keyStream).map(Cipher.decode).mkString
 
 object Cipher:
   private val MinKeyLength = 100
@@ -27,5 +27,9 @@ object Cipher:
     val encodedSymbol = (symbolIndex + keyIndex) % lettersInAlphabet + 'a'
     encodedSymbol.toChar
 
-  
+  def decode(symbol: Char, key: Char): Char =
+    val keyIndex = key - 'a'
+    val symbolIndex = symbol - 'a'
+    val encodedSymbol = (symbolIndex - keyIndex) % lettersInAlphabet + 'a'
+    encodedSymbol.toChar
   
