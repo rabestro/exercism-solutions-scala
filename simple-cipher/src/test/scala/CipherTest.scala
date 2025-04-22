@@ -16,21 +16,18 @@ class CipherTest extends AnyFunSuite with Matchers {
   }
 
   test("Invalid key - contains caps") { 
-    pending
-    intercept[IllegalArgumentException] { 
+    intercept[IllegalArgumentException] {
       Cipher(Some("ABCD"))
     }
   }
 
   test("Invalid key - contains numerics") { 
-    pending
     intercept[IllegalArgumentException] {
       Cipher(Some("123"))
     }
   }
 
   test("Invalid key - is empty") { 
-    pending
     intercept[IllegalArgumentException] {
       Cipher(Some(""))
     }
