@@ -50,37 +50,30 @@ class AllergiesTest extends AnyFunSuite with Matchers {
   }
 
   test("no allergies at all") {
-    pending
     Allergies.list(0) should be(List())
   }
 
   test("allergic to just eggs") {
-    pending
     Allergies.list(1) should be(List(Allergen.Eggs))
   }
 
   test("allergic to just peanuts") {
-    pending
     Allergies.list(2) should be(List(Allergen.Peanuts))
   }
 
   test("allergic to just strawberries") {
-    pending
     Allergies.list(8) should be(List(Allergen.Strawberries))
   }
 
   test("allergic to eggs and peanuts") {
-    pending
     Allergies.list(3) should be(List(Allergen.Eggs, Allergen.Peanuts))
   }
 
   test("allergic to more than eggs but not peanuts") {
-    pending
     Allergies.list(5) should be(List(Allergen.Eggs, Allergen.Shellfish))
   }
 
   test("allergic to lots of stuff") {
-    pending
     Allergies.list(248) should be(
       List(Allergen.Strawberries,
            Allergen.Tomatoes,
@@ -90,7 +83,6 @@ class AllergiesTest extends AnyFunSuite with Matchers {
   }
 
   test("allergic to everything") {
-    pending
     Allergies.list(255) should be(
       List(Allergen.Eggs,
            Allergen.Peanuts,
@@ -103,7 +95,6 @@ class AllergiesTest extends AnyFunSuite with Matchers {
   }
 
   test("ignore non allergen score parts") {
-    pending
     Allergies.list(509) should be(
       List(Allergen.Eggs,
            Allergen.Shellfish,
