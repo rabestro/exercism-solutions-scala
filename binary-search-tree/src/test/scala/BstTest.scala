@@ -31,7 +31,6 @@ class BstTest extends AnyFlatSpec with Matchers {
   }
 
   it should "handle complex tree - sort out of order list" in {
-    pending
     val bst = Bst.fromList(List(4, 2, 6, 1, 3, 7, 5))
     Bst.toList(bst) should equal((1 to 7).toList)
 
@@ -49,22 +48,18 @@ class BstTest extends AnyFlatSpec with Matchers {
   }
 
   it should "iterating over smaller element" in {
-    pending
     Bst.toList(Bst.fromList(List(4, 2))) should equal(List(2, 4))
   }
 
   it should "iterating over larger element" in {
-    pending
     Bst.toList(Bst.fromList(List(4, 5))) should equal(List(4, 5))
   }
 
   it should "iterating over complex tree" in {
-    pending
     Bst.toList(Bst.fromList(List(4, 2, 1, 3, 6, 7, 5))) should equal((1 to 7).toList)
   }
 
   it should "iterating over complex tree - chars" in {
-    pending
     Bst.toList(Bst.fromList(List('d', 'b', 'a', 'c', 'f', 'g', 'e'))) should
       equal(('a' to 'g').toList)
   }
