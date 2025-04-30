@@ -3,9 +3,11 @@ object Say:
   private val Billion = 1_000_000_000L
   private val Million = 1_000_000
   private val Thousand = 1_000
+  private val Hundred = 100
 
   def inEnglish(number: Long): Option[String] =
-    Option(sayNumber(number))
+    if number < 0 || MaxPronounceableNumber < number then None
+    else Some(sayNumber(number))
 
   private def sayNumber(number: Long): String =
     def sayMagnitude(divisor: Long, name: String) =
@@ -15,7 +17,6 @@ object Say:
         case remainder => quotientPart + " " + sayNumber(remainder)
 
     number match
-      case x if x < 0 || MaxPronounceableNumber < x => null
       case 0 => "zero"
       case 1 => "one"
       case 2 => "two"
@@ -44,8 +45,8 @@ object Say:
       case 70 => "seventy"
       case 80 => "eighty"
       case 90 => "ninety"
-      case n if n < 100 => sayNumber(n / 10 * 10) + "-" + sayNumber(n % 10)
-      case n if n < Thousand => sayMagnitude(100, "hundred")
+      case n if n < Hundred => s"${sayNumber(n / 10 * 10)}-${sayNumber(n % 10)}"
+      case n if n < Thousand => sayMagnitude(Hundred, "hundred")
       case n if n < Million => sayMagnitude(Thousand, "thousand")
       case n if n < Billion => sayMagnitude(Million, "million")
       case _ => sayMagnitude(Billion, "billion")

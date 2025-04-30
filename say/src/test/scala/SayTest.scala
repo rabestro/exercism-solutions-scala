@@ -50,7 +50,7 @@ class SayTest extends AnyFunSuite with Matchers {
   }
 
   test("one billion") {
-    Say.inEnglish(1000000000) should be(Some("one billion"))
+    Say.inEnglish(1_000_000_000) should be(Some("one billion"))
   }
 
   test("a big number") {
