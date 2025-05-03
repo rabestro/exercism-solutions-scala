@@ -4,7 +4,7 @@ object Alphametics:
   private type Hypothesis = List[Int]
 
   def solve(puzzle: String): Option[Map[Char, Int]] =
-    val words = puzzle.split("\\W+")
+    val words = puzzle.split("\\W+").filter(_.nonEmpty)
     val uniqueLetters = words.flatten.distinct
     val letterToIndex = uniqueLetters.zipWithIndex.toMap
 
@@ -18,23 +18,33 @@ object Alphametics:
       !leadingLetters.map(hypothesis).contains(0)
 
     val lines = words.map(_.reverse).reverse
-    val levels = lines.head.length
-    val range = 0 until levels
-    val matrix = range.map(i => lines.flatMap(_.lift(i) map letterToIndex))
+    val maxLength = lines.headOption.map(_.length).getOrElse(0)
 
-    def isSolution(hypothesis: Hypothesis): Boolean =
+    val matrix = (0 until maxLength)
+      .map(i => lines.flatMap(_.lift(i) map letterToIndex))
+
+    def isHypothesisValid(hypothesis: Hypothesis): Boolean =
       @tailrec
-      def checkLevel(level: Int, remained: Int): Boolean =
-        if level == matrix.size then true
+      def evaluateLevelConditions(level: Int, carry: Int): Boolean =
+        if level == matrix.size then
+          carry == 0
         else
-          val sum = remained + matrix(level).tail.map(hypothesis).sum
-          hypothesis(matrix(level).head) == sum % 10 && checkLevel(level + 1, sum / 10)
-      checkLevel(0, 0)
-    end isSolution
+          val sum = carry + matrix(level).tail.map(hypothesis).sum
+          hypothesis(matrix(level).head) == sum % 10 &&
+            evaluateLevelConditions(level + 1, sum / 10)
+      end evaluateLevelConditions
 
-    (0 to 9).toList
+      evaluateLevelConditions(0, 0)
+    end isHypothesisValid
+
+    val digits = (0 to 9).toList
+
+    digits
       .combinations(uniqueLetters.length)
       .flatMap(_.permutations)
       .filter(hasNoLeadingZeros)
-      .find(isSolution)
+      .find(isHypothesisValid)
       .map(uniqueLetters.zip(_).toMap)
+
+  end solve
+end Alphametics
