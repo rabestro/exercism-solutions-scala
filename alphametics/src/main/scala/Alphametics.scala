@@ -10,8 +10,7 @@ object Alphametics:
 
     val leadingLetters = words
       .filter(_.length > 1)
-      .map(_.head)
-      .toSet
+      .map(_.head).toSet
       .map(letterToIndex)
 
     val lines = words.map(_.reverse).reverse
