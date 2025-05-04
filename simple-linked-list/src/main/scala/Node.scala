@@ -1,14 +1,21 @@
-import SimpleLinkedList.fromSeq
+import scala.annotation.tailrec
 
-case class Node[T](data: Option[T], next: SimpleLinkedList[T]) extends SimpleLinkedList[T]:
-  override def isEmpty: Boolean = data.isEmpty
+case class Node[T](override val value: T,
+                   override val next: SimpleLinkedList[T]) extends SimpleLinkedList[T]:
+  override def isEmpty: Boolean = false
 
-  override def value: T = data.get
+  override def add(item: T): SimpleLinkedList[T] =
+    Node(item, reverse).reverse
 
-  override def add(item: T): SimpleLinkedList[T] = fromSeq(toSeq :+ item)
+  override def reverse: SimpleLinkedList[T] =
+    @tailrec
+    def loop(xs: SimpleLinkedList[T], ys: SimpleLinkedList[T]): SimpleLinkedList[T] =
+      xs match
+        case Empty() => ys
+        case Node(x, xs) => loop(xs, Node(x, ys))
+    end loop
 
-  override def reverse: SimpleLinkedList[T] = fromSeq(toSeq.reverse)
+    loop(this, Empty())
 
-  override def toSeq: Seq[T] = data match
-    case None => Seq()
-    case Some(x) => x +: next.toSeq
+
+  override def toSeq: Seq[T] = value +: next.toSeq

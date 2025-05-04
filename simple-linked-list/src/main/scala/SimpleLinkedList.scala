@@ -13,9 +13,9 @@ trait SimpleLinkedList[T]:
 
 
 object SimpleLinkedList:
-  def apply[T](xs: T*): SimpleLinkedList[T] = Node(None, null)
+  def apply[T](ts: T*): SimpleLinkedList[T] = fromSeq(ts)
 
-  def fromSeq[T](xs: Seq[T]): SimpleLinkedList[T] = xs match
-    case Nil => Node(None, null)
-    case head :: Nil => Node(Some(head), Node(None, null))
-    case head :: tail => Node(Some(head), fromSeq(tail))
+  def fromSeq[T](ts: Seq[T]): SimpleLinkedList[T] =
+    ts.foldRight(SimpleLinkedList.empty[T])(Node(_, _))
+
+  def empty[T]: SimpleLinkedList[T] = Empty[T]()
