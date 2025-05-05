@@ -13,4 +13,3 @@ object CryptoSquare:
 
   def ciphertext(plaintext: String): String =
     normalize.andThen(transpose).apply(plaintext)
-
