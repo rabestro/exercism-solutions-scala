@@ -1,6 +1,5 @@
-object Acronym {
-  private val WordPattern = raw"\b_?(?<firstLetter>\w)[^-\s]*[- ]*".r
+object Acronym:
+  private val FirstLetter = raw"(?<![\p{Alpha}'])\p{Alpha}".r
 
   def abbreviate(phrase: String): String =
-    WordPattern.replaceAllIn(phrase, "${firstLetter}").toUpperCase
-}
+    FirstLetter.findAllIn(phrase).mkString.toUpperCase
