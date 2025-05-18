@@ -46,4 +46,17 @@ object Domain:
           case None => acc
     }
 
+  def findFact(statement: Statement, facts: Map[Subject, House]): Option[(Statement, Fact)] =
+    val (unknownSubject, relation, knownSubject) = statement
+    val category = subjects(unknownSubject)
+    val house = facts(knownSubject)
+    val suggestions = relation match {
+      case Same => Set(house)
+      case RightOf => Set(house + 1)
+      case LeftOf => Set(house - 1)
+      case NextTo => Set(house + 1, house - 1)
+    }
+    val resultSet = suggestions.filter(isValidHouse).diff(occupiedHouses(facts).getOrElse(category, Set.empty))
+    if resultSet.size == 1 then Some((statement, (unknownSubject, resultSet.head))) else None
+  
 end Domain
