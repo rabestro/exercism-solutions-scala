@@ -1,4 +1,5 @@
 import Category.*
+import Relation.{NextTo, RightOf, Same}
 
 type Subject = String
 type House = Int
@@ -14,15 +15,23 @@ object Domain:
     "dancing" -> Hobby, "painting" -> Hobby, "reading" -> Hobby, "football" -> Hobby, "chess" -> Hobby,
   )
 
+  val statements: List[Statement] = List(
+    ("Englishman", Same, "red"), ("Spaniard", Same, "dog"), ("green", Same, "coffee"),
+    ("Ukrainian", Same, "tea"), ("green", RightOf, "ivory"), ("snail", Same, "dancing"),
+    ("yellow", Same, "painting"), ("reading", NextTo, "fox"), ("painting", NextTo, "horse"),
+    ("football", Same, "orange juice"), ("Japanese", Same, "chess"), ("Norwegian", NextTo, "blue")
+  )
+
+  val facts: Map[Subject, House] = Map("Norwegian" -> 1, "milk" -> 3)
+
   def occupiedHouses(facts: Map[Subject, House]): Map[Category, Set[House]] =
     facts.foldLeft(Map.empty[Category, Set[House]]) {
       case (acc, (subjectKey, houseValue)) =>
         subjects.get(subjectKey) match
           case Some(category) =>
-            // updatedWith allows modifying an entry based on its current value or adding it if not present
             acc.updatedWith(category) {
-              case Some(existingHouses) => Some(existingHouses + houseValue) // Add to existing set
-              case None => Some(Set(houseValue)) // Create new set with the house
+              case Some(existingHouses) => Some(existingHouses + houseValue)
+              case None => Some(Set(houseValue))
             }
           case None => acc
     }
