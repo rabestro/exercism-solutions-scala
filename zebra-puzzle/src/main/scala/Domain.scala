@@ -1,5 +1,5 @@
 import Category.*
-import Relation.{NextTo, RightOf, Same}
+import Relation.{LeftOf, NextTo, RightOf, Same}
 
 type Subject = String
 type House = Int
@@ -15,13 +15,21 @@ object Domain:
     "dancing" -> Hobby, "painting" -> Hobby, "reading" -> Hobby, "football" -> Hobby, "chess" -> Hobby,
   )
 
-  val statements: List[Statement] = List(
+  private val statements: Set[Statement] = Set(
     ("Englishman", Same, "red"), ("Spaniard", Same, "dog"), ("green", Same, "coffee"),
     ("Ukrainian", Same, "tea"), ("green", RightOf, "ivory"), ("snail", Same, "dancing"),
     ("yellow", Same, "painting"), ("reading", NextTo, "fox"), ("painting", NextTo, "horse"),
     ("football", Same, "orange juice"), ("Japanese", Same, "chess"), ("Norwegian", NextTo, "blue")
   )
 
+  private val reversedStatements = statements.map {
+    case (s1, RightOf, s2) => (s2, LeftOf, s1)
+    case (s1, LeftOf, s2) => (s2, RightOf, s1)
+    case (s1, relation, s2) => (s2, relation, s1)
+  }
+  
+  val allStatements = statements ++ reversedStatements
+  
   val facts: Map[Subject, House] = Map("Norwegian" -> 1, "milk" -> 3)
 
   def isValidHouse(house: House): Boolean = house >= 1 && house <= 5
