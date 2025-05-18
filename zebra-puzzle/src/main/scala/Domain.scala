@@ -24,6 +24,8 @@ object Domain:
 
   val facts: Map[Subject, House] = Map("Norwegian" -> 1, "milk" -> 3)
 
+  def isValidHouse(house: House): Boolean = house >= 1 && house <= 5
+
   def occupiedHouses(facts: Map[Subject, House]): Map[Category, Set[House]] =
     facts.foldLeft(Map.empty[Category, Set[House]]) {
       case (acc, (subjectKey, houseValue)) =>
