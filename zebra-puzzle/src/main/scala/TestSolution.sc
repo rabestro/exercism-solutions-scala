@@ -6,6 +6,7 @@ import Relation.{LeftOf, NextTo, RightOf, Same}
 
 val st = ("blue", NextTo, "Norwegian")
 Domain.occupiedHouses(facts)
+Domain.solve
 
 val candidates = Domain.allStatements.filter {
   case (s1, _, s2) => !facts.keySet.contains(s1) && facts.keySet.contains(s2)

@@ -27,19 +27,62 @@ object Domain:
     case (s1, LeftOf, s2) => (s2, RightOf, s1)
     case (s1, relation, s2) => (s2, relation, s1)
   }
-  
+
   val allStatements: Set[(Subject, Relation, Subject)] = statements ++ reversedStatements
-  
+
   val facts: Map[Subject, House] = Map("Norwegian" -> 1, "milk" -> 3)
 
   private def isValidHouse(house: House): Boolean = house >= 1 && house <= 5
 
-  /**
-   * Aggregates the houses occupied by subjects into categories, grouping the houses by their respective categories.
-   *
-   * @param facts A map where keys are subjects and values are the houses they occupy.
-   * @return A map where keys are categories and values are sets of houses occupied by subjects in those categories.
-   */
+  val solve: Option[Map[Subject, House]] = solution(facts, allStatements)
+
+  def solution(facts: Map[Subject, House], statements: Set[(Subject, Relation, Subject)]
+              ): Option[Map[Subject, House]] =
+
+
+    val relevantStatements = statements.filter {
+      case (s1, _, s2) => !facts.keySet.contains(s1) && facts.keySet.contains(s2)
+    }
+    println(s"Known facts: ${facts.size}, Statements: ${statements.size}")
+    val occupied = occupiedHouses(facts)
+
+    def possibleHouses(statement: Statement): (Statement, Set[House]) =
+      val (unknownSubject, relation, knownSubject) = statement
+      val category = subjects(unknownSubject)
+      val house = facts(knownSubject)
+      val suggestions = relation match {
+        case Same => Set(house)
+        case RightOf => Set(house + 1)
+        case LeftOf => Set(house - 1)
+        case NextTo => Set(house + 1, house - 1)
+      }
+      val houses = suggestions.filter(isValidHouse) diff occupied.getOrElse(category, Set.empty)
+      statement -> houses
+
+    if relevantStatements.isEmpty then
+      println("No relevant statements found")
+      None
+    else
+      val candidateHouses = relevantStatements.map(possibleHouses)
+      println("Possible Houses for relevant statements:")
+      candidateHouses.foreach(println)
+      if candidateHouses.exists(_._2.isEmpty) then
+        println("No solution")
+        None
+      else {
+        val preciseStatements = candidateHouses.filter(_._2.size == 1).map(_._1)
+        val determinedAssignments = candidateHouses.filter(_._2.size == 1).map(e => e._1._1 -> e._2.head)
+        if determinedAssignments.isEmpty then
+          println("No new facts found")
+          None
+        else
+          println(s"Found ${determinedAssignments.size} new facts")
+          determinedAssignments.foreach(println)
+          solution(facts ++ determinedAssignments, statements -- preciseStatements)
+
+      }
+
+
   def occupiedHouses(facts: Map[Subject, House]): Map[Category, Set[House]] =
     facts.foldLeft(Map.empty[Category, Set[House]]) {
       case (acc, (subjectKey, houseValue)) =>
@@ -52,13 +95,6 @@ object Domain:
           case None => acc
     }
 
-  /**
-   * Determines a possible fact based on the given statement and the current known facts.
-   *
-   * @param statement The statement to evaluate, consisting of an unknown subject, a relation, and a known subject.
-   * @param facts     A map of known associations between subjects and houses.
-   * @return An Option containing the statement paired with a newly derived fact if determinable, or None otherwise.
-   */
   def findFact(statement: Statement, facts: Map[Subject, House]): Option[(Statement, Fact)] =
     val (unknownSubject, relation, knownSubject) = statement
     val category = subjects(unknownSubject)
