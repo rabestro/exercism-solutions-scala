@@ -1,12 +1,6 @@
 import Category.*
+import Domain.{allStatements, facts}
 import Relation.{LeftOf, NextTo, RightOf, Same}
-
-type Subject = String
-type House = Int
-type Fact = (Subject, House)
-type Statement = (Subject, Relation, Subject)
-
-val facts: Map[Subject, House] = Map("Norwegian" -> 1, "milk" -> 3)
 
 // facts and statements => new fact based on a statement
 
@@ -17,5 +11,18 @@ val candidates = Domain.allStatements.filter {
   case (s1, _, s2) => !facts.keySet.contains(s1) && facts.keySet.contains(s2)
 }
 
-candidates.flatMap(Domain.findFact(_, facts)).headOption
+allStatements.size
+
+val possibleFact = candidates
+  .flatMap(Domain.findFact(_, facts))
+  .headOption
+
+val factsTwo = facts + possibleFact.get._2
+val statsTwo = allStatements - possibleFact.get._1
+
+statsTwo.size
+
+val candidates2 = statsTwo.filter {
+  case (s1, _, s2) => !factsTwo.keySet.contains(s1) && factsTwo.keySet.contains(s2)
+}
 
