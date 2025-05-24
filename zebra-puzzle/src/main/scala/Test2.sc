@@ -1,2 +1,4 @@
-Domain.solve
+val solution = Domain.solve
+
+solution.get.foreach(println)
 

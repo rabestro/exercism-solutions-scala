@@ -43,8 +43,18 @@ object Domain:
     val relevantStatements = statements.filter {
       case (s1, _, s2) => !facts.keySet.contains(s1) && facts.keySet.contains(s2)
     }
-    println(s"Known facts: ${facts.size}, Statements: ${statements.size}")
-    val occupied = occupiedHouses(facts)
+    println(s"Known facts: $facts, Statements: ${statements.size}")
+
+    val occupiedHouses = facts.foldLeft(Map.empty[Category, Set[House]]) {
+      case (acc, (subjectKey, houseValue)) =>
+        subjects.get(subjectKey) match
+          case Some(category) =>
+            acc.updatedWith(category) {
+              case Some(existingHouses) => Some(existingHouses + houseValue)
+              case None => Some(Set(houseValue))
+            }
+          case None => acc
+    }
 
     def possibleHouses(statement: Statement): (Statement, Set[House]) =
       val (unknownSubject, relation, knownSubject) = statement
@@ -56,18 +66,26 @@ object Domain:
         case LeftOf => Set(house - 1)
         case NextTo => Set(house + 1, house - 1)
       }
-      val houses = suggestions.filter(isValidHouse) diff occupied.getOrElse(category, Set.empty)
+      val houses = suggestions.filter(isValidHouse) diff occupiedHouses.getOrElse(category, Set.empty)
       statement -> houses
 
     if relevantStatements.isEmpty then
       println("No relevant statements found")
-      None
+      val firstUnknown = subjects.filterNot(s => facts.contains(s._1)).head
+      val subject = firstUnknown._1
+      //println(s"occupiedHouses: $occupiedHouses")
+      val freeHouses = (1 to 5).toSet diff occupiedHouses.getOrElse(firstUnknown._2, Set.empty)
+      println(s"We try unknow $firstUnknown for houses: $freeHouses")
+      freeHouses
+        .map(house => solution(facts + (subject -> house), statements))
+        .find(_.isDefined)
+        .flatten
     else
       val candidateHouses = relevantStatements.map(possibleHouses)
-      println("Possible Houses for relevant statements:")
+      //println("Possible Houses for relevant statements:")
       candidateHouses.foreach(println)
       if candidateHouses.exists(_._2.isEmpty) then
-        println("No solution")
+        println("❌ No solution possible for given facts and statements")
         None
       else {
         val preciseStatements = candidateHouses.filter(_._2.size == 1).map(_._1)
@@ -78,10 +96,10 @@ object Domain:
         else
           println(s"Found ${determinedAssignments.size} new facts")
           determinedAssignments.foreach(println)
-          solution(facts ++ determinedAssignments, statements -- preciseStatements)
-
+          val fullFacts = facts ++ determinedAssignments
+          if fullFacts.size == 25 then Some(fullFacts)
+          else solution(fullFacts, statements -- preciseStatements)
       }
-
 
   def occupiedHouses(facts: Map[Subject, House]): Map[Category, Set[House]] =
     facts.foldLeft(Map.empty[Category, Set[House]]) {
