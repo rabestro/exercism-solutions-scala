@@ -58,7 +58,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes 2") {
-    pending
     OcrNumbers.convert(List(" _ ",
                             " _|",
                             "|_ ",
@@ -66,7 +65,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes 3") {
-    pending
     OcrNumbers.convert(List(" _ ",
                             " _|",
                             " _|",
@@ -74,7 +72,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes 4") {
-    pending
     OcrNumbers.convert(List("   ",
                             "|_|",
                             "  |",
@@ -82,7 +79,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes 5") {
-    pending
     OcrNumbers.convert(List(" _ ",
                             "|_ ",
                             " _|",
@@ -90,7 +86,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes 6") {
-    pending
     OcrNumbers.convert(List(" _ ",
                             "|_ ",
                             "|_|",
@@ -98,7 +93,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes 7") {
-    pending
     OcrNumbers.convert(List(" _ ",
                             "  |",
                             "  |",
@@ -106,7 +100,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes 8") {
-    pending
     OcrNumbers.convert(List(" _ ",
                             "|_|",
                             "|_|",
@@ -114,7 +107,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes 9") {
-    pending
     OcrNumbers.convert(List(" _ ",
                             "|_|",
                             " _|",
@@ -122,7 +114,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes string of decimal numbers") {
-    pending
     OcrNumbers.convert(
       List("    _  _     _  _  _  _  _  _ ",
            "  | _| _||_||_ |_   ||_||_|| |",
@@ -132,7 +123,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
 
   test(
     "Numbers separated by empty lines are recognized. Lines are joined by commas.") {
-    pending
     OcrNumbers.convert(
       List("    _  _ ",
            "  | _| _|",

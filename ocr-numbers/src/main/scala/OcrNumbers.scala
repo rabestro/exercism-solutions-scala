@@ -2,7 +2,8 @@ case object OcrNumbers:
   private val Width = 3
   private val Height = 4
   private val Digits = List(
-    " _ | ||_|   ", "     |  |   ", " _  _||_    ")
+    " _ | ||_|   ", "     |  |   ", " _  _||_    ", " _  _| _|   ", "   |_|  |   ",
+    " _ |_  _|   ", " _ |_ |_|   ", " _   |  |   ", " _ |_||_|   ", " _ |_| _|   ")
 
   def convert(input: List[String]): String =
     def extractSymbol(row: Int) = (col: Int) => input
@@ -15,7 +16,7 @@ case object OcrNumbers:
 
     lazy val getLine = (row: Int) => (0 until cols)
       .map(extractSymbol(row))
-      .map(symbol => Digits.indexOf(symbol))
+      .map(Digits.indexOf(_))
       .map(index => if index >= 0 then index.toString else "?")
       .mkString
 
