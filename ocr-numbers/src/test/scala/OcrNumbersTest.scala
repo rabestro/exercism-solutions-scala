@@ -35,7 +35,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
 
   test(
     "Input with a number of columns that is not a multiple of three raises an error") {
-    pending
     OcrNumbers.convert(List("    ",
                             "   |",
                             "   |",
@@ -43,7 +42,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Recognizes 110101100") {
-    pending
     OcrNumbers.convert(
       List("       _     _        _  _ ",
            "  |  || |  || |  |  || || |",
@@ -52,7 +50,6 @@ class OcrNumbersTest extends AnyFunSuite with Matchers {
   }
 
   test("Garbled numbers in a string are replaced with ?") {
-    pending
     OcrNumbers.convert(
       List("       _     _           _ ",
            "  |  || |  || |     || || |",

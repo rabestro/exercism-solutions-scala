@@ -19,5 +19,5 @@ case object OcrNumbers:
       .map(index => if index >= 0 then index.toString else "?")
       .mkString
 
-    if input.size % Height != 0 then "?"
+    if input.size % Height != 0 || input.exists(_.length % Width != 0) then "?"
     else (0 until rows).map(getLine).mkString(",")
