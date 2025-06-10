@@ -20,19 +20,16 @@ class RailFenceCipherTest extends AnyFunSuite with Matchers {
   }
 
   test("decode with three rails") {
-    pending
     RailFenceCipher.decode("TEITELHDVLSNHDTISEIIEA", 3) should be(
       "THEDEVILISINTHEDETAILS")
   }
 
   test("decode with five rails") {
-    pending
     RailFenceCipher.decode("EIEXMSMESAORIWSCE", 5) should be(
       "EXERCISMISAWESOME")
   }
 
   test("decode with six rails") {
-    pending
     RailFenceCipher.decode(
       "133714114238148966225439541018335470986172518171757571896261",
       6) should be(
