@@ -1,14 +1,17 @@
 object RailFenceCipher:
   def encode(plainText: String, rails: Int): String =
     val maxRow = rails - 1
-    val encodedChars = for {
-      row <- 0 to maxRow
-      col <- row until plainText.length by 2 * maxRow
-      innerRow = row > 0 && row < maxRow
-      index <- if innerRow then Seq(col, col + 2 * (rails - row) - 2) else Seq(col)
-      if index < plainText.length
-    } yield plainText(index)
-    encodedChars.mkString
+    val maxCol = plainText.length - 1
+    val step = 2 * maxRow
+    val top = 0 to maxCol by step
+    val bottom = maxRow to maxCol by step
+    val inners = for {
+      row <- 1 until maxRow
+      first <- row to maxCol by step
+      second = first + 2 * (rails - row - 1)
+      index <- if second <= maxCol then Seq(first, second) else Seq(first)
+    } yield index
+    (top ++ inners ++ bottom).map(plainText).mkString
   end encode
 
   def decode(encodedText: String, rails: Int): String = encodedText
